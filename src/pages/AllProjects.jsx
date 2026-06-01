@@ -103,16 +103,18 @@ const AllProjects = () => {
                       </span>
                     </td>
                     <td className="whitespace-nowrap">
-                      {project.contactNumber ? (
-                        <a
-                          href={`tel:${String(project.contactNumber).replace(/\s/g, "")}`}
-                          className="link-gold"
-                        >
-                          {project.contactNumber}
-                        </a>
-                      ) : (
-                        "—"
-                      )}
+                      {(() => {
+                        let d = String(project.contactNumber || "").replace(/\D/g, "");
+                        if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+                        if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+                        return d ? (
+                          <a href={`tel:+91${d}`} className="link-gold">
+                            {d}
+                          </a>
+                        ) : (
+                          "—"
+                        );
+                      })()}
                     </td>
                     <td className="whitespace-nowrap">{project.reraNo || "—"}</td>
                     <td>

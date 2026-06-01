@@ -152,7 +152,12 @@ const UpdateProject = () => {
         address: found.address || "",
         propertyType: found.propertyType || "",
         status: found.status || "Under Construction",
-        contactNumber: found.contactNumber || "",
+        contactNumber: (() => {
+          let d = String(found.contactNumber || "").replace(/\D/g, "");
+          if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+          if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+          return d.slice(0, 10);
+        })(),
         latitude: found.latitude != null && found.latitude !== "" ? String(found.latitude) : "",
         longitude:
           found.longitude != null && found.longitude !== "" ? String(found.longitude) : "",
@@ -953,9 +958,16 @@ const UpdateProject = () => {
               <input
                 type="tel"
                 name="contactNumber"
+                inputMode="numeric"
+                maxLength={10}
                 value={form.contactNumber}
-                placeholder="e.g. +91 98765 43210"
-                onChange={handleFormChange}
+                placeholder="9404958265"
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    contactNumber: e.target.value.replace(/\D/g, "").slice(0, 10),
+                  }))
+                }
                 className="p-2 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500"
               />
             </div>

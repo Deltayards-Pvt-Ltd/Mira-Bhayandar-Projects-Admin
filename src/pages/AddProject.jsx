@@ -598,9 +598,21 @@ const AddProject = () => {
             </div>
             <div>
               <label htmlFor="contactNumber" className="block text-sm font-semibold mb-2 text-white">Contact number</label>
-              <input id="contactNumber" type="tel" value={form.contactNumber} placeholder="e.g. +91 98765 43210"
-                onChange={(e) => setForm((prev) => ({ ...prev, contactNumber: e.target.value }))}
-                className="w-full border border-gray-200 rounded-md bg-gray-800 p-2 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500" />
+              <input
+                id="contactNumber"
+                type="tel"
+                inputMode="numeric"
+                maxLength={10}
+                value={form.contactNumber}
+                placeholder="9404958265"
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    contactNumber: e.target.value.replace(/\D/g, "").slice(0, 10),
+                  }))
+                }
+                className="w-full border border-gray-200 rounded-md bg-gray-800 p-2 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500"
+              />
             </div>
             <div className="md:col-span-2 flex items-start gap-3 rounded-md border border-gray-600 bg-gray-800/60 p-4">
               <input
