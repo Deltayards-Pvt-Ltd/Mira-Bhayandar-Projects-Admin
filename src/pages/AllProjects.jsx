@@ -79,7 +79,6 @@ const AllProjects = () => {
                   <th>Status</th>
                   <th>On website</th>
                   <th>Contact</th>
-                  <th>RERA no.</th>
                   <th>RERA possession</th>
                   <th className="text-right">Actions</th>
                 </tr>
@@ -115,12 +114,6 @@ const AllProjects = () => {
                           "—"
                         );
                       })()}
-                    </td>
-                    <td className="whitespace-nowrap">{project.reraNo || "—"}</td>
-                    <td>
-                      {[project.reraPossession?.month, project.reraPossession?.year]
-                        .filter(Boolean)
-                        .join(" ") || "—"}
                     </td>
                     <td className="text-right">
                       <div className="flex justify-end items-center gap-2">
