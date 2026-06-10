@@ -172,7 +172,7 @@ const AddProject = () => {
       },
     ]);
   const removeLayout = (id) =>
-    setLayouts((prev) => {
+    setLayouts((prev) => { 
       const rem = prev.find((x) => x.id === id);
       (rem?.imageFiles || []).forEach((img) => {
         if (img.preview) URL.revokeObjectURL(img.preview);
