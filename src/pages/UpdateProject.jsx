@@ -74,6 +74,7 @@ const UpdateProject = () => {
     propertyType: "",
     status: "Under Construction",
     contactNumber: "",
+    whatsappNumber: "",
     latitude: "",
     longitude: "",
     description: "",
@@ -154,6 +155,12 @@ const UpdateProject = () => {
         status: found.status || "Under Construction",
         contactNumber: (() => {
           let d = String(found.contactNumber || "").replace(/\D/g, "");
+          if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+          if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+          return d.slice(0, 10);
+        })(),
+        whatsappNumber: (() => {
+          let d = String(found.whatsappNumber || "").replace(/\D/g, "");
           if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
           if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
           return d.slice(0, 10);
@@ -755,6 +762,7 @@ const UpdateProject = () => {
         plans,
         status: form.status,
         contactNumber: form.contactNumber.trim(),
+        whatsappNumber: form.whatsappNumber.trim(),
         latitude: form.latitude.trim(),
         longitude: form.longitude.trim(),
         description: form.description,
@@ -961,7 +969,7 @@ const UpdateProject = () => {
                 inputMode="numeric"
                 maxLength={10}
                 value={form.contactNumber}
-                placeholder="9404958265"
+                placeholder="9999999999"
                 onChange={(e) =>
                   setForm((prev) => ({
                     ...prev,
@@ -971,6 +979,25 @@ const UpdateProject = () => {
                 className="p-2 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500"
               />
             </div>
+            <div className="flex flex-col">
+              <label className="mb-1 text-gray-200">Whatspp number</label>
+              <input
+                type="tel"
+                name="whatsappNumber"
+                inputMode="numeric"
+                maxLength={10}
+                value={form.whatsappNumber}
+                placeholder="9999999999"
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    whatsappNumber: e.target.value.replace(/\D/g, "").slice(0, 10),
+                  }))
+                }
+                className="p-2 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-500 focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+
             <div className="flex flex-col md:col-span-2">
               <label className="mb-2 flex items-start gap-3 cursor-pointer">
                 <input

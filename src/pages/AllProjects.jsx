@@ -79,6 +79,7 @@ const AllProjects = () => {
                   <th>Status</th>
                   <th>On website</th>
                   <th>Contact</th>
+                  <th>Whatsapp</th>
                   <th>RERA possession</th>
                   <th className="text-right">Actions</th>
                 </tr>
@@ -108,6 +109,20 @@ const AllProjects = () => {
                         if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
                         return d ? (
                           <a href={`tel:+91${d}`} className="link-gold">
+                            {d}
+                          </a>
+                        ) : (
+                          "—"
+                        );
+                      })()}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {(() => {
+                        let d = String(project.whatsappNumber || "").replace(/\D/g, "");
+                        if (d.length === 12 && d.startsWith("91")) d = d.slice(2);
+                        if (d.length === 11 && d.startsWith("0")) d = d.slice(1);
+                        return d ? (
+                          <a href={`https://wa.me/${d}`} className="link-gold">
                             {d}
                           </a>
                         ) : (

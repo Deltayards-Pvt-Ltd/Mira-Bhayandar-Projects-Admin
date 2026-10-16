@@ -49,6 +49,7 @@ const AddProject = () => {
     propertyType: "",
     status: "Under Construction",
     contactNumber: "",
+    whatsappNumber: "",
     latitude: "",
     longitude: "",
     description: "",
@@ -485,6 +486,7 @@ const AddProject = () => {
           plans,
           status: form.status,
           contactNumber: form.contactNumber.trim(),
+          whatsappNumber: form.whatsappNumber.trim(),
           latitude: form.latitude.trim(),
           longitude: form.longitude.trim(),
           description: form.description,
@@ -604,11 +606,29 @@ const AddProject = () => {
                 inputMode="numeric"
                 maxLength={10}
                 value={form.contactNumber}
-                placeholder="9404958265"
+                placeholder="9999999999"
                 onChange={(e) =>
                   setForm((prev) => ({
                     ...prev,
                     contactNumber: e.target.value.replace(/\D/g, "").slice(0, 10),
+                  }))
+                }
+                className="w-full border border-gray-200 rounded-md bg-gray-800 p-2 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+            <div> 
+              <label htmlFor="whatsappNumber" className="block text-sm font-semibold mb-2 text-white">Whatsapp number</label>
+              <input
+                id="whatsappNumber"
+                type="tel"
+                inputMode="numeric"
+                maxLength={10}
+                value={form.whatsappNumber}
+                placeholder="9999999999"
+                  onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    whatsappNumber: e.target.value.replace(/\D/g, "").slice(0, 10),
                   }))
                 }
                 className="w-full border border-gray-200 rounded-md bg-gray-800 p-2 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500"
